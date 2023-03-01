@@ -12,9 +12,9 @@ namespace _521Assignment3.Models
         public string Gender { get; set; }
         [Required]
         public int Age { get; set; }
-        [Required]
-        public string IMDBLink { get; set; }
-        [Required]
+       
+        public string? IMDBLink { get; set; }
+        
         public byte[]? Photo { get; set; }
 
     }

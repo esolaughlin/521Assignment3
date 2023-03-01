@@ -53,7 +53,7 @@ namespace _521Assignment3.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Gender,Age,IMDBLink,Photo")] Actor actor, IFormFile Photo)
         {
             if (ModelState.IsValid)
@@ -69,6 +69,18 @@ namespace _521Assignment3.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(actor);
+        }
+        //copy this in movie eventually :)
+        public async Task<IActionResult> GetActorPhoto(int id)
+        {
+            var actor = await _context.Actor
+                .FirstOrDefaultAsync (m => m.Id == id);
+            if(actor == null)
+            {
+                return NotFound();
+            }
+            var imageData = actor.Photo;
+            return File(imageData, "image/jpg");
         }
 
         // GET: Actor/Edit/5

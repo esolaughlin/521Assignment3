@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using _521Assignment3.Data;
 using _521Assignment3.Models;
+using System.Numerics;
 
 namespace _521Assignment3.Controllers
 {
@@ -54,15 +55,33 @@ namespace _521Assignment3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,IMBDLink,Genre,ReleaseYear,Media")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Title,IMBDLink,Genre,ReleaseYear,Media")] Movie movie, IFormFile Media)
         {
             if (ModelState.IsValid)
             {
+                if (Media != null && Media.Length > 0)
+                {
+                    var memoryStream = new MemoryStream();
+                    await Media.CopyToAsync(memoryStream);
+                    movie.Media = memoryStream.ToArray();
+                }
                 _context.Add(movie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(movie);
+        }
+
+        public async Task<IActionResult> GetMovieMedia(int id)
+        {
+            var movie = await _context.Movie
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            var mediaData = movie.Media;
+            return File(mediaData, "image/jpg");
         }
 
         // GET: Movie/Edit/5
