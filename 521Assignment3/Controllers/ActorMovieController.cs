@@ -49,8 +49,8 @@ namespace _521Assignment3.Controllers
         // GET: ActorMovie/Create
         public IActionResult Create()
         {
-            ViewData["ActorId"] = new SelectList(_context.Actor, "Id", "Gender");
-            ViewData["MovieId"] = new SelectList(_context.Movie, "Id", "Genre");
+            ViewData["ActorId"] = new SelectList(_context.Actor, "Id", "Name");
+            ViewData["MovieId"] = new SelectList(_context.Movie, "Id", "Title");
             return View();
         }
 
@@ -61,14 +61,15 @@ namespace _521Assignment3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ActorId,MovieId")] ActorMovie actorMovie)
         {
-            if (ModelState.IsValid)
-            {
+          
                 _context.Add(actorMovie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["ActorId"] = new SelectList(_context.Actor, "Id", "Gender", actorMovie.ActorId);
-            ViewData["MovieId"] = new SelectList(_context.Movie, "Id", "Genre", actorMovie.MovieId);
+            
+            
+            Console.WriteLine("Not valid ModelState");
+            ViewData["ActorId"] = new SelectList(_context.Actor, "Id", "Name", actorMovie.ActorId);
+            ViewData["MovieId"] = new SelectList(_context.Movie, "Id", "Title", actorMovie.MovieId);
             return View(actorMovie);
         }
 
@@ -85,8 +86,8 @@ namespace _521Assignment3.Controllers
             {
                 return NotFound();
             }
-            ViewData["ActorId"] = new SelectList(_context.Actor, "Id", "Gender", actorMovie.ActorId);
-            ViewData["MovieId"] = new SelectList(_context.Movie, "Id", "Genre", actorMovie.MovieId);
+            ViewData["ActorId"] = new SelectList(_context.Actor, "Id", "Name", actorMovie.ActorId);
+            ViewData["MovieId"] = new SelectList(_context.Movie, "Id", "Title", actorMovie.MovieId);
             return View(actorMovie);
         }
 
@@ -122,8 +123,8 @@ namespace _521Assignment3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ActorId"] = new SelectList(_context.Actor, "Id", "Gender", actorMovie.ActorId);
-            ViewData["MovieId"] = new SelectList(_context.Movie, "Id", "Genre", actorMovie.MovieId);
+            ViewData["ActorId"] = new SelectList(_context.Actor, "Id", "Name", actorMovie.ActorId);
+            ViewData["MovieId"] = new SelectList(_context.Movie, "Id", "Title", actorMovie.MovieId);
             return View(actorMovie);
         }
 

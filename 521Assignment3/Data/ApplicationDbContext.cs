@@ -10,8 +10,8 @@ namespace _521Assignment3.Data
             : base(options)
         {
         }
-        public DbSet<_521Assignment3.Models.Actor> Actor { get; set; }
-        public DbSet<_521Assignment3.Models.Movie> Movie { get; set; }
-        public DbSet<_521Assignment3.Models.ActorMovie> ActorMovie { get; set; }
+        public DbSet<_521Assignment3.Models.Actor>? Actor { get; set; }
+        public DbSet<_521Assignment3.Models.Movie>? Movie { get; set; }
+        public DbSet<_521Assignment3.Models.ActorMovie>? ActorMovie { get; set; }
     }
 }

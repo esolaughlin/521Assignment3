@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using _521Assignment3.Data;
 using _521Assignment3.Models;
+using Tweetinvi;
+using VaderSharp2;
 
 namespace _521Assignment3.Controllers
 {
@@ -40,7 +42,35 @@ namespace _521Assignment3.Controllers
                 return NotFound();
             }
 
-            return View(actor);
+            //code here
+            ActorDetailsViewModel actorDetailsVM = new ActorDetailsViewModel();
+            actorDetailsVM.Actor = actor;
+            actorDetailsVM.Tweets = new List<ActTweet>();
+
+            var userClient = new TwitterClient("AAx9UfdCemph0Pg0t8Moq5c6L", "LbhoERpFGjBESYSNjTHuRvE0R80cGxZBx5lJWanM5lFpO2Hs63", "1455230009153503238-WTxQgoYUAQ3D9PTSsUu8stHkmJvuVe", "2ZVnM9tWbCSNAhyJcyC4WPIgiIbUWZ77MTLSx2Qb8TkW3");
+            var searchResponse = await userClient.SearchV2.SearchTweetsAsync(actor.Name);
+            var tweets = searchResponse.Tweets;
+            var analyzer = new SentimentIntensityAnalyzer();
+
+            Double tweetTotal = 0;
+            for (int i = 0; i < tweets.Length; i++) {
+                //Console.WriteLine(tweets[i].Text);
+                var singleTweet = new ActTweet();
+                singleTweet.Tweet = tweets[i].Text;
+                var results = analyzer.PolarityScores(tweets[i].Text);
+                Console.WriteLine("Compound score: " + results.Compound);
+                tweetTotal += results.Compound;
+                singleTweet.Sentiment = results.Compound;
+                actorDetailsVM.Tweets.Add(singleTweet);
+            }
+
+            Console.WriteLine("Average compound score: " + tweetTotal / tweets.Length);
+
+
+
+            //copy and paste the code above to movies too!
+
+            return View(actorDetailsVM);
         }
 
         // GET: Actor/Create
