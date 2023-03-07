@@ -4,27 +4,27 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 style="color: darkgoldenrod">Movie Information</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" style="color: darkgoldenrod">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th style="color: darkgoldenrod">
                 @Html.DisplayNameFor(model => model.Title)
             </th>
-            <th>
+            <th style="color: darkgoldenrod">
                 @Html.DisplayNameFor(model => model.IMBDLink)
             </th>
-            <th>
+            <th style="color: darkgoldenrod">
                 @Html.DisplayNameFor(model => model.Genre)
             </th>
-            <th>
+            <th style="color: darkgoldenrod">
                 @Html.DisplayNameFor(model => model.ReleaseYear)
             </th>
-            <th>
+            <th style="color: darkgoldenrod">
                 @Html.DisplayNameFor(model => model.Media)
             </th>
             <th></th>
@@ -56,9 +56,9 @@
                  }
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a style="color: darkgoldenrod"  asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a style="color: darkgoldenrod" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a style="color: darkgoldenrod" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

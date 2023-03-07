@@ -4,6 +4,14 @@
     ViewData["Title"] = "Details";
 }
 
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/start/jquery-ui.css" integrity="sha384-01WuRmrvEBcOCopQ6jdZlWPPFiXvhcF3ST+/YhEf+W3RBj6+DsJoRsG2JSWVygyh" crossorigin="anonymous">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha384-Ft/vb48LwsAEtgltj7o+6vtS2esTU9PCpDqcXs4OCVQFZu5BqprHtUCZ4kjK+bpE" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha384-4D3G3GikQs6hLlLZGdz5wLFzuqE9v4yVGAcOH86y23JqBDPzj9viv0EqyfIa6YUL" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.css" integrity="sha384-30pU1avnn31lEc+b5AZW2eFG5rNaULzXd9gHMk0bDtJkK1YAUfizWx1vEK4SbT7A" crossorigin="anonymous">
+<script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.js" integrity="sha384-apERv/vfl/R6zmx+HUeBeGTjYRpHuiF1JRYCuBd9KhRME4NTtll1FkO+CelUWYgp" crossorigin="anonymous"></script>
+
 <h1>Details</h1>
 
 <div>
@@ -53,7 +61,11 @@
 </div>
 
 
+
+
 <div>
+   
+
     Average Tweet Sentiment:
     @if (Model.SentimentAvg() != 0)
     {
@@ -62,15 +74,15 @@
 
     @if (Model.SentimentAvg() > 0)
     {
-        <span>Positive</span>
+        <span>positive</span>
     }
     else if (Model.SentimentAvg() < 0)
     {
-        <span>Negative</span>
+        <span>negative</span>
     }
     else
     {
-        <span>Neutral</span>
+        <span>neutral</span>
     }
 </div>
 
